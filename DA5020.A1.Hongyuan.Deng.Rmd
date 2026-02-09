@@ -1,0 +1,91 @@
+---
+title: "DA5020.A1.Hongyuan.Deng"
+output:
+  html_document:
+    df_print: paged
+---
+
+#Q1
+#2
+```{r}
+#data frame is a base construction of R to save data. similar to Excel frame.
+frame <- data.frame(
+  pl <- c("Bsoton","Newyork"),
+  cl <- c("NEU","NYU")
+)
+print(frame)
+```
+#Q2
+```{r}
+fr2 <- data.frame(
+  cars <- c("Truck","Car","SUV"),
+  mpg <- c(11,30,24),
+  cost <- c(45000,25000,35000)
+)
+print(fr2)
+#use date.frame to produce frame
+```
+
+#Q2a
+```{r}
+Sc_1 <- fr2[1,3]
+cat("the row1 of col3:", Sc_1)
+Sc_2 <- fr2[1:3,]
+cat("first row to third:")
+print(Sc_2)
+Sc_3 <- fr2[,ncol(fr2)]
+cat("last_row:", Sc_3)
+#use fr2[,] to capture sepcific rows and cols
+```
+#Q3
+```{r}
+head_row <- head(mtcars,3)
+tail_row <- tail(mtcars,5)
+cat("first 3 line:")
+print(head_row)
+cat("last 5 line:")
+print(tail_row)
+#use head(data,n) and tail(data,n) to get first or last n line in datas
+```
+
+#Q4
+```{r}
+str(mtcars)
+
+cat("2 categorical variables: cyl, gear")
+cat("2 continuous variables: mpg, disp")
+#cyl and gear are discrete categories, they are finite values suitable for grouping.
+#mpg and disp are continuous values that are often used to calculate statistics such as mean and variance.
+```
+
+#Q5
+```{r}
+install.packages("ggplot2")
+library(ggplot2)
+picture <- ggplot(mtcars, aes(x=disp, y=mpg))
+print(picture)
+# can't display, we need add scatter layer
+picture_2 <- picture + geom_point()
+print(picture_2)
+```
+
+#Q6
+```{r}
+library(ggplot2)
+data(mpg)
+str(mpg)
+picture_3 <- ggplot(data = mpg, aes(x=displ, y=hwy, color = cyl)) + geom_point()
+print(picture_3)
+# use color = cyl means classify color accordding to cyl
+#this frame displays the relationship between displ and hwy, with color indicating the number of cyl.
+```
+
+#Q7
+```{r}
+picture_4 <- ggplot(data = mpg, aes(displ, hwy, color = cyl)) + geom_point() + facet_wrap(vars(drv))
+print(picture_4)
+#drv is the driver type, and facet_wrap creates multiple subgraphs based on the variable drv (driver type: front, rear, or four wheels) so that each subgraph shows the data distribution for one driver type. 
+#It can be seen from the result chart that the distribution of highway fuel consumption (hwy) of rear-wheel-drive models is more concentrated
+```
+
+
